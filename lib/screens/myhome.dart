@@ -7,11 +7,11 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  ThemeData lightTheme = ThemeData(
+  ThemeData _lightTheme = ThemeData(
           primaryColor: Colors.teal,
           buttonColor: Colors.teal,
           accentColor: Colors.teal),
-      darkTheme = ThemeData(
+      _darkTheme = ThemeData(
           primaryColor: Colors.grey[800],
           buttonColor: Colors.blueGrey,
           accentColor: Colors.teal[800],
@@ -20,27 +20,27 @@ class _MyHomeState extends State<MyHome> {
           ),
           scaffoldBackgroundColor: Colors.blueGrey[800]);
 
-  bool dark = true;
+  bool _dark = true;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: dark ? darkTheme : lightTheme,
+        theme: _dark ? _darkTheme : _lightTheme,
         home: Scaffold(
             appBar: AppBar(
               title: Text('Programación Móvil 2020'),
               actions: [
-                IconButton(
-                    icon: Icon(dark
-                        ? Icons.wb_sunny_outlined
-                        : Icons.nights_stay_outlined),
-                    onPressed: () {
+                Icon(Icons.wb_sunny_outlined),
+                Switch(
+                    value: _dark,
+                    onChanged: (d) {
                       setState(() {
-                        dark = !dark;
+                        _dark = d;
                       });
-                    })
+                    }),
+                Icon(Icons.nights_stay_outlined),
               ],
             ),
             body: Center(child: Converter())));
