@@ -1,5 +1,6 @@
-import 'package:demo_app/widgets/converter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:demo_app/widgets/converter.dart';
 
 class MyHome extends StatefulWidget {
   @override
@@ -43,6 +44,18 @@ class _MyHomeState extends State<MyHome> {
                 Icon(Icons.nights_stay_outlined),
               ],
             ),
-            body: Center(child: Converter())));
+            body: 
+            ChangeNotifierProvider<Notifier>(
+              create: (context)=>Notifier(),
+            child:Converter())
+            ));
+  }
+}
+
+class Notifier extends ChangeNotifier {
+  bool decimalKeyboard = false;
+  void switchKeyboard() {
+    decimalKeyboard = !decimalKeyboard;
+    notifyListeners();
   }
 }
